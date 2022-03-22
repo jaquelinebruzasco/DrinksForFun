@@ -5,7 +5,7 @@ import java.io.Serializable
 
 data class DrinkResponseModel(
     @SerializedName("drinks")
-    val drinks: List<DrinkModel>
+    val drinks: List<DrinkModel?>
 ): Serializable
 
 data class DrinkModel(
@@ -79,6 +79,6 @@ data class DrinkModel(
     val measure14: String?,
     @SerializedName("strMeasure15")
     val measure15: String?,
-    @SerializedName("strImageSource")
-    val image: String
+    @SerializedName("strDrinkThumb")
+    val image: String?
 ): Serializable

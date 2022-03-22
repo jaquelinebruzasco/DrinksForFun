@@ -2,13 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home"
+        android:title="@string/fragment_menu_home" />
+
+    <item
         android:id="@+id/nav_favorite"
         android:icon="@drawable/ic_favorite"
-        android:title="Favorite" />
+        android:title="@string/fragment_menu_favorite" />
 
     <item
         android:id="@+id/nav_random"
         android:icon="@drawable/ic_drink"
-        android:title="Random" />
+        android:title="@string/fragment_menu_random" />
 
 </menu>

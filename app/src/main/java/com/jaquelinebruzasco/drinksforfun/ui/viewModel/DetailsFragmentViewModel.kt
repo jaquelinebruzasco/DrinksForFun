@@ -1,6 +1,34 @@
 package com.jaquelinebruzasco.drinksforfun.ui.viewModel
 
 import androidx.lifecycle.ViewModel
+import com.jaquelinebruzasco.drinksforfun.domain.remote.api.DrinksForFunRepository
+import com.jaquelinebruzasco.drinksforfun.domain.remote.model.DrinkModel
+import com.jaquelinebruzasco.drinksforfun.ui.fragments.adapters.IngredientsModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class DetailsFragmentViewModel: ViewModel() {
+@HiltViewModel
+class DetailsFragmentViewModel @Inject constructor(
+    private val repository: DrinksForFunRepository
+) : ViewModel() {
+
+    fun setMeasuresAndIngredients(data: DrinkModel): MutableList<IngredientsModel> {
+        return mutableListOf(
+            IngredientsModel(data.measure1, data.ingredient1),
+            IngredientsModel(data.measure2, data.ingredient2),
+            IngredientsModel(data.measure3, data.ingredient3),
+            IngredientsModel(data.measure4, data.ingredient4),
+            IngredientsModel(data.measure5, data.ingredient5),
+            IngredientsModel(data.measure6, data.ingredient6),
+            IngredientsModel(data.measure7, data.ingredient7),
+            IngredientsModel(data.measure8, data.ingredient8),
+            IngredientsModel(data.measure9, data.ingredient9),
+            IngredientsModel(data.measure10, data.ingredient10),
+            IngredientsModel(data.measure11, data.ingredient11),
+            IngredientsModel(data.measure12, data.ingredient12),
+            IngredientsModel(data.measure13, data.ingredient13),
+            IngredientsModel(data.measure14, data.ingredient14),
+            IngredientsModel(data.measure15, data.ingredient15)
+        )
+    }
 }

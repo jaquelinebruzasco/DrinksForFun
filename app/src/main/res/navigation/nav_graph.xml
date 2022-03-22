@@ -32,7 +32,7 @@
         tools:layout="@layout/fragment_details">
         <argument
             android:name="cocktailInformation"
-            app:argType="com.jaquelinebruzasco.drinksforfun.domain.remote.model.DrinkResponseModel" />
+            app:argType="com.jaquelinebruzasco.drinksforfun.domain.remote.model.DrinkModel" />
     </fragment>
 
 </navigation>

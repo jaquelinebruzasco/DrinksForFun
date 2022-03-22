@@ -2,12 +2,18 @@
     <string name="app_name">Drinks for Fun</string>
     <string name="drawer_view_favorite">Favorite</string>
     <string name="drawer_view_random">Random Drink</string>
+    <string name="fragment_home_no_drink_found_error">No drink was found</string>
     <string name="fragment_details_info">Cocktail Information</string>
     <string name="fragment_details_category">Category</string>
     <string name="fragment_details_alcohol">Alcohol</string>
     <string name="fragment_details_glass">Glass</string>
     <string name="fragment_details_ingredients">Ingredients</string>
     <string name="fragment_details_instructions">Instructions</string>
+    <string name="fragment_menu_home">Home</string>
+    <string name="fragment_menu_favorite">Favorite</string>
+    <string name="fragment_menu_random">Let me choose a drink for you</string>
     <string name="nav_open">Open</string>
     <string name="nav_close">Close</string>
+    <string name="error_message">Failed to fetch data</string>
+    <string name="no_instruction">No instruction was found</string>
 </resources>

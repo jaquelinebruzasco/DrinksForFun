@@ -32,10 +32,24 @@ class HomeFragmentViewModel @Inject constructor(
         }
     }
 
-    sealed class DrinksForFunState {
-        object Idle: DrinksForFunState()
-        object Loading: DrinksForFunState()
-        class Success(val data: DrinkResponseModel): DrinksForFunState()
-        class Failure(val message: String): DrinksForFunState()
+    fun getCocktailByLetter(letter: String) {
+        viewModelScope.launch {
+            _cocktail.value = DrinksForFunState.Loading
+            val response = repository.getCocktailByFirstLetter(letter)
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    _cocktail.value = DrinksForFunState.Success(it)
+                } ?: kotlin.run { _cocktail.value = DrinksForFunState.Failure("") }
+            } else {
+                _cocktail.value = DrinksForFunState.Failure("")
+            }
+        }
     }
+}
+
+sealed class DrinksForFunState {
+    object Idle: DrinksForFunState()
+    object Loading: DrinksForFunState()
+    class Success(val data: DrinkResponseModel?): DrinksForFunState()
+    class Failure(val message: String): DrinksForFunState()
 }

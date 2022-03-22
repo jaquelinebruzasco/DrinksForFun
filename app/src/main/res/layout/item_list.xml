@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardElevation="@dimen/default_margin"
-    android:layout_margin="12dp">
+    android:layout_margin="12dp"
+    app:cardElevation="@dimen/default_margin">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -23,8 +23,11 @@
 
         <TextView
             android:id="@+id/tv_name"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/default_margin"
+            android:layout_marginEnd="@dimen/default_margin"
+            android:textAlignment="center"
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="@id/iv_drink"
             app:layout_constraintEnd_toEndOf="parent"
