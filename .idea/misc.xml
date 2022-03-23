@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/jaque/Documents/DrinksforFun/app/src/main/res/drawable/ic_drink.xml" value="0.3828125" />
         <entry key="..\:/Users/jaque/Documents/DrinksforFun/app/src/main/res/drawable/ic_favorite.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/jaque/Documents/DrinksforFun/app/src/main/res/drawable/ic_favorite_black_24dp.xml" value="0.3828125" />
+        <entry key="..\:/Users/jaque/Documents/DrinksforFun/app/src/main/res/drawable/ic_home.xml" value="0.3828125" />
         <entry key="..\:/Users/jaque/Documents/DrinksforFun/app/src/main/res/drawable/ic_local_bar_black_24dp.xml" value="0.3828125" />
         <entry key="..\:/Users/jaque/Documents/DrinksforFun/app/src/main/res/drawable/ic_menu_black_24dp.xml" value="0.22135416666666666" />
         <entry key="..\:/Users/jaque/Documents/DrinksforFun/app/src/main/res/layout/activity_main.xml" value="0.2957427536231884" />
@@ -17,6 +19,7 @@
         <entry key="..\:/Users/jaque/Documents/DrinksforFun/app/src/main/res/layout/item_letter_list.xml" value="0.2957427536231884" />
         <entry key="..\:/Users/jaque/Documents/DrinksforFun/app/src/main/res/layout/item_list.xml" value="0.2957427536231884" />
         <entry key="..\:/Users/jaque/Documents/DrinksforFun/app/src/main/res/layout/nav_header.xml" value="0.2957427536231884" />
+        <entry key="..\:/Users/jaque/Documents/DrinksforFun/app/src/main/res/layout/toolbar.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/jaque/Documents/DrinksforFun/app/src/main/res/menu/drawer_menu.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/jaque/Documents/DrinksforFun/app/src/main/res/menu/drawer_view.xml" value="0.36666666666666664" />
       </map>

@@ -9,7 +9,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jaquelinebruzasco.drinksforfun.R
+import com.jaquelinebruzasco.drinksforfun.databinding.ActivityMainBinding
 import com.jaquelinebruzasco.drinksforfun.databinding.FragmentDetailsBinding
+import com.jaquelinebruzasco.drinksforfun.databinding.ToolbarBinding
 import com.jaquelinebruzasco.drinksforfun.domain.remote.model.DrinkModel
 import com.jaquelinebruzasco.drinksforfun.ui.fragments.adapters.IngredientsAdapter
 import com.jaquelinebruzasco.drinksforfun.ui.loadImage
@@ -21,7 +23,14 @@ class DetailsFragment : Fragment() {
 
     private val viewModel by viewModels<DetailsFragmentViewModel>()
     private lateinit var _binding: FragmentDetailsBinding
-    private val ingredientsAdapter by lazy { IngredientsAdapter(viewModel.setMeasuresAndIngredients(args.cocktailInformation)) }
+
+    private val ingredientsAdapter by lazy {
+        IngredientsAdapter(
+            viewModel.setMeasuresAndIngredients(
+                args.cocktailInformation
+            )
+        )
+    }
     private val args: DetailsFragmentArgs by navArgs()
 
     override fun onCreateView(

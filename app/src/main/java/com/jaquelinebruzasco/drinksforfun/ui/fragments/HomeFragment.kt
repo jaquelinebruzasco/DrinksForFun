@@ -28,6 +28,9 @@ class HomeFragment : Fragment() {
     private lateinit var _binding: FragmentHomeBinding
     private val cocktailsAdapter by lazy { CocktailsAdapter(::navigateToDetails) }
     private val lettersAdapter by lazy { LettersAdapter(createAlphabeticalList(), ::showCocktailByFirstLetter) }
+    private companion object {
+        const val DEFAULT_LETTER = "A"
+    }
 
 
     override fun onCreateView(
@@ -43,6 +46,7 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setupRecycleView()
         initObservables()
+        showCocktailByFirstLetter(DEFAULT_LETTER)
     }
 
     private fun initObservables() {

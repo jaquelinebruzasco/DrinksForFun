@@ -1,15 +1,19 @@
 package com.jaquelinebruzasco.drinksforfun.ui.viewModel
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.jaquelinebruzasco.drinksforfun.domain.local.DrinksForFunLocalRepository
 import com.jaquelinebruzasco.drinksforfun.domain.remote.api.DrinksForFunRepository
 import com.jaquelinebruzasco.drinksforfun.domain.remote.model.DrinkModel
 import com.jaquelinebruzasco.drinksforfun.ui.fragments.adapters.IngredientsModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class DetailsFragmentViewModel @Inject constructor(
-    private val repository: DrinksForFunRepository
+    private val repository: DrinksForFunRepository,
+    private val localRepository: DrinksForFunLocalRepository
 ) : ViewModel() {
 
     fun setMeasuresAndIngredients(data: DrinkModel): MutableList<IngredientsModel> {
@@ -30,5 +34,9 @@ class DetailsFragmentViewModel @Inject constructor(
             IngredientsModel(data.measure14, data.ingredient14),
             IngredientsModel(data.measure15, data.ingredient15)
         )
+    }
+
+    fun insert(drinkModel: DrinkModel) = viewModelScope.launch {
+        localRepository.insert(drinkModel)
     }
 }

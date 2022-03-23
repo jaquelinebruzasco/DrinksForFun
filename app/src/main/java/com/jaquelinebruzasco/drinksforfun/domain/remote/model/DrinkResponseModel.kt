@@ -1,5 +1,7 @@
 package com.jaquelinebruzasco.drinksforfun.domain.remote.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
@@ -8,7 +10,12 @@ data class DrinkResponseModel(
     val drinks: List<DrinkModel?>
 ): Serializable
 
+@Entity(tableName = "DrinkModel")
 data class DrinkModel(
+    @SerializedName("idDrink")
+    val idApi: String,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int = idApi.toInt(),
     @SerializedName("strDrink")
     val name: String,
     @SerializedName("strCategory")
