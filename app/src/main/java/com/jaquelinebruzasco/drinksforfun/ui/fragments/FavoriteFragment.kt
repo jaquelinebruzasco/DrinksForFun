@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavDeepLinkBuilder
+import com.jaquelinebruzasco.drinksforfun.R
 import com.jaquelinebruzasco.drinksforfun.databinding.FragmentDetailsBinding
 import com.jaquelinebruzasco.drinksforfun.databinding.FragmentFavoriteBinding
 import com.jaquelinebruzasco.drinksforfun.ui.viewModel.DetailsFragmentViewModel
@@ -26,4 +28,7 @@ class FavoriteFragment : Fragment() {
         return _binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
 }

@@ -13,8 +13,8 @@ interface DrinksDao {
     @Query("SELECT * FROM drinkmodel order by name")
     fun getAll(): Flow<List<DrinkModel>>
 
-    @Query("SELECT * FROM drinkmodel WHERE id = :id")
-    fun isFavorite(id: Int) : Boolean
+    @Query("SELECT EXISTS (SELECT * FROM drinkmodel WHERE id = :id)")
+    suspend fun isFavorite(id: Int) : Boolean
 
     @Delete
     suspend fun delete(drinkModel: DrinkModel)

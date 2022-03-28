@@ -9,4 +9,5 @@ class DrinksForFunLocalRepository @Inject constructor(
     suspend fun insert(drinkModel: DrinkModel) = dao.insert(drinkModel)
     fun getAll() = dao.getAll()
     suspend fun delete(drinkModel: DrinkModel) = dao.delete(drinkModel)
+    suspend fun isFavorite(id: Int) = dao.isFavorite(id)
 }

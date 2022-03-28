@@ -29,15 +29,9 @@ class FavoriteFragmentViewModel @Inject constructor(
             }
         }
     }
-
-    fun delete(drinkModel: DrinkModel) = viewModelScope.launch {
-        localRepository.delete(drinkModel)
-    }
 }
 
 sealed class DrinksForFunLocalState {
     object Empty : DrinksForFunLocalState()
-    object Loading : DrinksForFunLocalState()
     class Success(val data: List<DrinkModel>) : DrinksForFunLocalState()
-    class Failure(val message: String) : DrinksForFunLocalState()
 }

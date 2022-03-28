@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.jaquelinebruzasco.drinksforfun.domain.local.DrinksForFunLocalRepository
 import com.jaquelinebruzasco.drinksforfun.domain.remote.api.DrinksForFunRepository
 import com.jaquelinebruzasco.drinksforfun.domain.remote.model.DrinkModel
+import com.jaquelinebruzasco.drinksforfun.domain.remote.model.DrinkResponseModel
 import com.jaquelinebruzasco.drinksforfun.ui.fragments.adapters.IngredientsModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,12 +14,27 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DetailsFragmentViewModel @Inject constructor(
+class RandomFragmentViewModel @Inject constructor(
+    private val repository: DrinksForFunRepository,
     private val localRepository: DrinksForFunLocalRepository
-) : ViewModel() {
+): ViewModel() {
 
-    private val _isFavorite = MutableStateFlow(false)
-    val isFavorite: StateFlow<Boolean> = _isFavorite
+    private val _randomCocktail = MutableStateFlow<DrinksForFunRandomState>(DrinksForFunRandomState.Idle)
+    val randomCocktail: StateFlow<DrinksForFunRandomState> = _randomCocktail
+
+    fun getRandomCocktail() {
+        viewModelScope.launch {
+            _randomCocktail.value = DrinksForFunRandomState.Loading
+            val response = repository.getRandomCocktail()
+            if (response.isSuccessful) {
+                response.body()?.let {
+                    _randomCocktail.value = DrinksForFunRandomState.Success(it.drinks[0])
+                } ?: kotlin.run { _randomCocktail.value = DrinksForFunRandomState.Failure("") }
+            } else {
+                _randomCocktail.value = DrinksForFunRandomState.Failure("")
+            }
+        }
+    }
 
     fun setMeasuresAndIngredients(data: DrinkModel): MutableList<IngredientsModel> {
         return mutableListOf(
@@ -40,10 +56,12 @@ class DetailsFragmentViewModel @Inject constructor(
         )
     }
 
-    fun getFavorite(id: Int) {
+    fun isFavorite(id: Int): Boolean {
+        var isFavorite = false
         viewModelScope.launch {
-            _isFavorite.value = localRepository.isFavorite(id)
+            isFavorite = localRepository.isFavorite(id)
         }
+        return isFavorite
     }
 
 
@@ -54,5 +72,12 @@ class DetailsFragmentViewModel @Inject constructor(
     fun delete(drinkModel: DrinkModel) = viewModelScope.launch {
         localRepository.delete(drinkModel)
     }
+
 }
 
+sealed class DrinksForFunRandomState {
+    object Idle: DrinksForFunRandomState()
+    object Loading: DrinksForFunRandomState()
+    class Success(val data: DrinkModel?): DrinksForFunRandomState()
+    class Failure(val message: String): DrinksForFunRandomState()
+}

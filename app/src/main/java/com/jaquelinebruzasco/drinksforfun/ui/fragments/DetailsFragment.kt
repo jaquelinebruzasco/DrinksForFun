@@ -4,8 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jaquelinebruzasco.drinksforfun.R
@@ -17,6 +20,7 @@ import com.jaquelinebruzasco.drinksforfun.ui.fragments.adapters.IngredientsAdapt
 import com.jaquelinebruzasco.drinksforfun.ui.loadImage
 import com.jaquelinebruzasco.drinksforfun.ui.viewModel.DetailsFragmentViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
 class DetailsFragment : Fragment() {
@@ -46,6 +50,19 @@ class DetailsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         loadInfo(args.cocktailInformation)
         setupRecycleView()
+        initObservables()
+    }
+
+    private fun initObservables() {
+        lifecycleScope.launchWhenCreated {
+            viewModel.isFavorite.collectLatest {
+                _binding.ivFavorite.setImageDrawable(ContextCompat.getDrawable(
+                    requireContext(),
+                    if (it) R.drawable.ic_favorite else R.drawable.ic_favorite_border
+                ))
+            }
+        }
+
     }
 
     private fun setupRecycleView() = with(_binding) {
@@ -71,6 +88,17 @@ class DetailsFragment : Fragment() {
                 tvInstructionsInfo.text = data.instructions
             }
 
+            viewModel.getFavorite(data.id)
+
+            ivFavorite.setOnClickListener {
+                if (viewModel.isFavorite.value) {
+                    viewModel.delete(data)
+                    viewModel.getFavorite(data.id)
+                } else {
+                    viewModel.insert(data)
+                    viewModel.getFavorite(data.id)
+                }
+            }
         }
     }
 }

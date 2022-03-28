@@ -5,6 +5,7 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/homeFragment">
 
+
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.jaquelinebruzasco.drinksforfun.ui.fragments.HomeFragment"
@@ -13,6 +14,10 @@
         <action
             android:id="@+id/action_homeFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
+        <deepLink
+            android:id="@+id/deepLink1"
+            app:uri="drinksforfun://home" />
+
     </fragment>
 
     <fragment
@@ -23,6 +28,9 @@
         <action
             android:id="@+id/action_favoriteFragment_to_detailsFragment"
             app:destination="@id/detailsFragment" />
+        <deepLink
+            android:id="@+id/deepLink2"
+            app:uri="drinksforfun://favorite/" />
     </fragment>
 
     <fragment
@@ -33,6 +41,16 @@
         <argument
             android:name="cocktailInformation"
             app:argType="com.jaquelinebruzasco.drinksforfun.domain.remote.model.DrinkModel" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/randomFragment"
+        android:name="com.jaquelinebruzasco.drinksforfun.ui.fragments.RandomFragment"
+        android:label="RandomFragment"
+        tools:layout="@layout/fragment_details" >
+        <deepLink
+            android:id="@+id/deepLink3"
+            app:uri="drinksforfun://random" />
     </fragment>
 
 </navigation>
