@@ -20,14 +20,20 @@ class FavoriteFragmentViewModel @Inject constructor(
     private val _favorites = MutableStateFlow<DrinksForFunLocalState>(DrinksForFunLocalState.Empty)
     val favorites: StateFlow<DrinksForFunLocalState> = _favorites
 
-    fun favoriteDrinks() = viewModelScope.launch {
-        localRepository.getAll().collectLatest {
-            if (it.isNullOrEmpty()) {
-                _favorites.value = DrinksForFunLocalState.Empty
-            } else {
-                _favorites.value = DrinksForFunLocalState.Success(it)
+    fun favoriteDrinks(){
+        viewModelScope.launch {
+            localRepository.getAll().collectLatest {
+                if (it.isNullOrEmpty()) {
+                    _favorites.value = DrinksForFunLocalState.Empty
+                } else {
+                    _favorites.value = DrinksForFunLocalState.Success(it)
+                }
             }
         }
+    }
+
+    fun delete(drinkModel: DrinkModel) = viewModelScope.launch {
+        localRepository.delete(drinkModel)
     }
 }
 

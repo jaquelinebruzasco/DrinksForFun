@@ -17,10 +17,14 @@ import javax.inject.Inject
 class RandomFragmentViewModel @Inject constructor(
     private val repository: DrinksForFunRepository,
     private val localRepository: DrinksForFunLocalRepository
-): ViewModel() {
+) : ViewModel() {
 
-    private val _randomCocktail = MutableStateFlow<DrinksForFunRandomState>(DrinksForFunRandomState.Idle)
+    private val _randomCocktail =
+        MutableStateFlow<DrinksForFunRandomState>(DrinksForFunRandomState.Idle)
     val randomCocktail: StateFlow<DrinksForFunRandomState> = _randomCocktail
+
+    private val _isFavorite = MutableStateFlow(false)
+    val isFavorite: StateFlow<Boolean> = _isFavorite
 
     fun getRandomCocktail() {
         viewModelScope.launch {
@@ -57,12 +61,10 @@ class RandomFragmentViewModel @Inject constructor(
         )
     }
 
-    fun isFavorite(id: Int): Boolean {
-        var isFavorite = false
+    fun getFavorite(id: Int) {
         viewModelScope.launch {
-            isFavorite = localRepository.isFavorite(id)
+            _isFavorite.value = localRepository.isFavorite(id)
         }
-        return isFavorite
     }
 
 
@@ -82,8 +84,8 @@ class RandomFragmentViewModel @Inject constructor(
 }
 
 sealed class DrinksForFunRandomState {
-    object Idle: DrinksForFunRandomState()
-    object Loading: DrinksForFunRandomState()
-    class Success(val data: DrinkModel?): DrinksForFunRandomState()
-    class Failure(val message: String): DrinksForFunRandomState()
+    object Idle : DrinksForFunRandomState()
+    object Loading : DrinksForFunRandomState()
+    class Success(val data: DrinkModel?) : DrinksForFunRandomState()
+    class Failure(val message: String) : DrinksForFunRandomState()
 }

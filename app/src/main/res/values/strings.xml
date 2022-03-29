@@ -9,6 +9,7 @@
     <string name="fragment_details_glass">Glass</string>
     <string name="fragment_details_ingredients">Ingredients</string>
     <string name="fragment_details_instructions">Instructions</string>
+    <string name="fragment_favorite_empty">Your favorite list is empty.</string>
     <string name="fragment_menu_home">Home</string>
     <string name="fragment_menu_favorite">Favorite</string>
     <string name="fragment_menu_random">Let me choose a drink for you</string>
@@ -16,4 +17,5 @@
     <string name="nav_close">Close</string>
     <string name="error_message">Failed to fetch data</string>
     <string name="no_instruction">No instruction was found</string>
+    <string name="delete_cocktail">The cocktail was removed from your favorite list.</string>
 </resources>

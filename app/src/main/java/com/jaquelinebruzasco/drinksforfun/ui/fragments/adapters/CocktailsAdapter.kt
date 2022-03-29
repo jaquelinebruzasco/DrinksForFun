@@ -43,5 +43,10 @@ class CocktailsAdapter(
         }
 
     }
+
+    fun getCocktailAtPosition(position: Int): DrinkModel? {
+        return list[position]
+
+    }
 }
 

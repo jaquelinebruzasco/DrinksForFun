@@ -21,7 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
-class RandomFragment: Fragment() {
+class RandomFragment : Fragment() {
 
     private val viewModel by viewModels<RandomFragmentViewModel>()
     private lateinit var _binding: FragmentDetailsBinding
@@ -55,6 +55,14 @@ class RandomFragment: Fragment() {
                     is DrinksForFunRandomState.Success -> {
                         hideProgressBar()
                         state.data?.let { loadRandomView(it) }
+                        viewModel.isFavorite.collectLatest {
+                            _binding.ivFavorite.setImageDrawable(
+                                ContextCompat.getDrawable(
+                                    requireContext(),
+                                    if (it) R.drawable.ic_favorite else R.drawable.ic_favorite_border
+                                )
+                            )
+                        }
                     }
                 }
             }
@@ -100,11 +108,19 @@ class RandomFragment: Fragment() {
             } else {
                 tvInstructionsInfo.text = data.instructions
             }
-            ivFavorite.setImageDrawable(
-                ContextCompat.getDrawable(
-                requireContext(),
-                if (viewModel.isFavorite(data.id)) R.drawable.ic_favorite else R.drawable.ic_favorite_border
-            ))
+
+            viewModel.getFavorite(data.id)
+
+            ivFavorite.setOnClickListener {
+                if (viewModel.isFavorite.value) {
+                    viewModel.delete(data)
+                    viewModel.getFavorite(data.id)
+                } else {
+                    viewModel.insert(data)
+                    viewModel.getFavorite(data.id)
+                }
+            }
+
         }
 
     }

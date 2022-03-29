@@ -30,7 +30,7 @@
             app:destination="@id/detailsFragment" />
         <deepLink
             android:id="@+id/deepLink2"
-            app:uri="drinksforfun://favorite/" />
+            app:uri="drinksforfun://favorite" />
     </fragment>
 
     <fragment

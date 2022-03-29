@@ -19,5 +19,19 @@
         app:layout_constraintVertical_bias="0.0"
         tools:listitem="@layout/item_list" />
 
+    <TextView
+        android:id="@+id/tv_empty_list"
+        style="@style/Body.Info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/fragment_favorite_empty"
+        android:textAlignment="center"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
