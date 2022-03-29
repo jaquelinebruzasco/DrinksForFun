@@ -14,8 +14,8 @@ data class DrinkResponseModel(
 data class DrinkModel(
     @SerializedName("idDrink")
     val idApi: String,
-    @PrimaryKey(autoGenerate = true)
-    val id: Int = idApi.toInt(),
+    @PrimaryKey(autoGenerate = false)
+    var id: Int,
     @SerializedName("strDrink")
     val name: String,
     @SerializedName("strCategory")

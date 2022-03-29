@@ -24,6 +24,7 @@ class HomeFragmentViewModel @Inject constructor(
             val response = repository.getCocktailByName(cocktailName)
             if (response.isSuccessful) {
                 response.body()?.let {
+                    mapIdForLocalDatabase(it)
                     _cocktail.value = DrinksForFunState.Success(it)
                 } ?: kotlin.run { _cocktail.value = DrinksForFunState.Failure("") }
             } else {
@@ -38,11 +39,18 @@ class HomeFragmentViewModel @Inject constructor(
             val response = repository.getCocktailByFirstLetter(letter)
             if (response.isSuccessful) {
                 response.body()?.let {
+                    mapIdForLocalDatabase(it)
                     _cocktail.value = DrinksForFunState.Success(it)
                 } ?: kotlin.run { _cocktail.value = DrinksForFunState.Failure("") }
             } else {
                 _cocktail.value = DrinksForFunState.Failure("")
             }
+        }
+    }
+
+    private fun mapIdForLocalDatabase(drinkResponse: DrinkResponseModel) {
+        drinkResponse.drinks.forEach { item ->
+            item?.id = item?.idApi?.toInt() ?: 0
         }
     }
 }

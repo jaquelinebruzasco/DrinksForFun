@@ -28,6 +28,7 @@ class RandomFragmentViewModel @Inject constructor(
             val response = repository.getRandomCocktail()
             if (response.isSuccessful) {
                 response.body()?.let {
+                    mapIdForLocalDatabase(it)
                     _randomCocktail.value = DrinksForFunRandomState.Success(it.drinks[0])
                 } ?: kotlin.run { _randomCocktail.value = DrinksForFunRandomState.Failure("") }
             } else {
@@ -73,6 +74,11 @@ class RandomFragmentViewModel @Inject constructor(
         localRepository.delete(drinkModel)
     }
 
+    private fun mapIdForLocalDatabase(drinkResponse: DrinkResponseModel) {
+        drinkResponse.drinks.forEach { item ->
+            item?.id = item?.idApi?.toInt() ?: 0
+        }
+    }
 }
 
 sealed class DrinksForFunRandomState {
