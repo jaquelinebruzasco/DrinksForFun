@@ -3,6 +3,7 @@ package com.jaquelinebruzasco.drinksforfun.ui.viewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.jaquelinebruzasco.drinksforfun.domain.remote.api.DrinksForFunRepository
+import com.jaquelinebruzasco.drinksforfun.domain.remote.model.DrinkModel
 import com.jaquelinebruzasco.drinksforfun.domain.remote.model.DrinkResponseModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -24,7 +25,7 @@ class HomeFragmentViewModel @Inject constructor(
             val response = repository.getCocktailByName(cocktailName)
             if (response.isSuccessful) {
                 response.body()?.let {
-                    mapIdForLocalDatabase(it)
+                    mapIdForLocalDatabase(it.drinks)
                     _cocktail.value = DrinksForFunState.Success(it)
                 } ?: kotlin.run { _cocktail.value = DrinksForFunState.Failure("") }
             } else {
@@ -39,7 +40,7 @@ class HomeFragmentViewModel @Inject constructor(
             val response = repository.getCocktailByFirstLetter(letter)
             if (response.isSuccessful) {
                 response.body()?.let {
-                    mapIdForLocalDatabase(it)
+                    mapIdForLocalDatabase(it.drinks)
                     _cocktail.value = DrinksForFunState.Success(it)
                 } ?: kotlin.run { _cocktail.value = DrinksForFunState.Failure("") }
             } else {
@@ -48,9 +49,11 @@ class HomeFragmentViewModel @Inject constructor(
         }
     }
 
-    private fun mapIdForLocalDatabase(drinkResponse: DrinkResponseModel) {
-        drinkResponse.drinks.forEach { item ->
-            item?.id = item?.idApi?.toInt() ?: 0
+    private fun mapIdForLocalDatabase(drinks: List<DrinkModel?>) {
+        if (drinks != null) {
+            drinks.forEach { item ->
+                item?.id = item?.idApi?.toInt() ?: 0
+            }
         }
     }
 }
