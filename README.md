@@ -1,5 +1,5 @@
 # DrinksForFun
-DrinksForFun is a small application based on modern Android application libraries(Android Jetpack) and MVVM architecture.
+DrinksForFun is a small application based on modern Android application libraries (Android Jetpack) and MVVM architecture.
 This application was created to focus on Android Jetpack, study of dependency injections, and data fetching with retrofit. 
 The application allows you to search drinks, save favorite drinks for offline access and see the information of a random drink.
 
