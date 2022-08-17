@@ -7,4 +7,4 @@ The application allows you to search drinks, save favorite drinks for offline ac
 |  |  |   |
 | :---:                              | :---:                             | :---:                              |
 | ![](https://imgur.com/b7XzD1q.png)  | ![](https://imgur.com/vA3lRUd.png) | ![](https://imgur.com/UfdwX8N.png)  |
-| ![](https://imgur.com/lwRNFUU.png)  | ![](https://imgur.com/0naja99.png) | :---:                              |   
+| ![](https://imgur.com/lwRNFUU.png)  | ![](https://imgur.com/0naja99.png) |                                     |   
